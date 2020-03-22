@@ -6,7 +6,7 @@ import com.example.shoppinglist.dao.ProductDao
 import com.example.shoppinglist.models.Product
 
 @Database(entities = [Product::class], version = 1, exportSchema = false)
-abstract class ShoppingListRoomDatabase: RoomDatabase() {
+abstract class ShoppingListRoomDatabase : RoomDatabase() {
 
   abstract fun productDao(): ProductDao
 

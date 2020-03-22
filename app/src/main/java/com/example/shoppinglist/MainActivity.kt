@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
   private val mainScope = CoroutineScope(Dispatchers.Main)
 
 
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
@@ -39,6 +38,10 @@ class MainActivity : AppCompatActivity() {
 
     initViews()
   }
+
+  /**
+   * Initialize the UI of the shopping list
+   */
   private fun initViews() {
     rvShoppingList.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
     rvShoppingList.adapter = productAdapter
@@ -48,6 +51,10 @@ class MainActivity : AppCompatActivity() {
 
     fab.setOnClickListener { addProduct() }
   }
+
+  /**
+   * retrieve the shopping list from the room database
+   */
   private fun getShoppingListFromDatabase() {
     mainScope.launch {
       val shoppingList = withContext(Dispatchers.IO) {
@@ -59,6 +66,9 @@ class MainActivity : AppCompatActivity() {
     }
   }
 
+  /**
+   * check if the fields are not empty or blank
+   */
   private fun validateFields(): Boolean {
     return if (etProduct.text.toString().isNotBlank() && etQuantity.text.toString().isNotBlank()) {
       true
@@ -68,6 +78,9 @@ class MainActivity : AppCompatActivity() {
     }
   }
 
+  /**
+   * add a product to the room database
+   */
   private fun addProduct() {
     if (validateFields()) {
       mainScope.launch {
@@ -84,6 +97,7 @@ class MainActivity : AppCompatActivity() {
       }
     }
   }
+
   private fun createItemTouchHelper(): ItemTouchHelper {
 
     // Callback which is used to create the ItemTouch helper. Only enables left swipe.
@@ -114,6 +128,9 @@ class MainActivity : AppCompatActivity() {
     return ItemTouchHelper(callback)
   }
 
+  /**
+   * delete shopping list from database
+   */
   private fun deleteShoppingList() {
     mainScope.launch {
       withContext(Dispatchers.IO) {

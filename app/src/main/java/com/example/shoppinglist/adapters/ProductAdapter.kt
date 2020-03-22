@@ -8,7 +8,8 @@ import com.example.shoppinglist.R
 import com.example.shoppinglist.models.Product
 import kotlinx.android.synthetic.main.item_product.view.*
 
-class ProductAdapter(private val products: List<Product>) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+class ProductAdapter(private val products: List<Product>) :
+  RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     return ViewHolder(
